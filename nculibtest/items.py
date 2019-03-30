@@ -10,6 +10,7 @@ import scrapy
 
 class NculibtestItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
     name = scrapy.Field()
     addr = scrapy.Field()
+    ztu = scrapy.Field()
+    IBSN = scrapy.Field()

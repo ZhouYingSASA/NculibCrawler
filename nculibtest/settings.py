@@ -19,7 +19,7 @@ NEWSPIDER_MODULE = 'nculibtest.spiders'
 #USER_AGENT = 'nculibtest (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = False
+ROBOTSTXT_OBEY = False  # nculib禁止robot爬取
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
