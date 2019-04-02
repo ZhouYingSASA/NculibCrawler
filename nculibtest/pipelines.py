@@ -14,7 +14,7 @@ class NculibtestPipeline(object):
 
     def process_item(self, item, spider):
         # 将URL存入缓存
-        self.cache.insert(item['addr'])
+        self.cache.insert("to_crawl", item['addr'])
 
         with open(r"./list.txt", 'a') as fp:
             fp.write(str(item['name']) + '\n' + str(item['addr']) + '\n\n')

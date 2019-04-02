@@ -11,11 +11,11 @@ class CacheTool:
     def get_connect(self):
         return StrictRedis(connection_pool=self.pool)
 
-    def pop(self):
-        return self.get_connect().spop("to_crawl")
+    def pop(self, key):
+        return self.get_connect().spop(key)
 
-    def insert(self, url):
-        return self.get_connect().sadd("to_crawl", url)
+    def insert(self, key, url):
+        return self.get_connect().sadd(key, url)
 
     def finish_crawl(self, url):
         return self.get_connect().sadd("crawled", url)
