@@ -24,7 +24,7 @@ class CacheTool:
         return bool(self.get_connect().sismember("crawled", url))
 
 
-cache_tool = CacheTool("redis://:ncuhome@fucheng360.top:6379/0")
-
+# cache_tool = CacheTool("redis://:ncuhome@fucheng360.top:6379/0")
+cache_tool = CacheTool("redis:///localhost:6379/0")
 
 
