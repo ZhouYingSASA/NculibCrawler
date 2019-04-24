@@ -27,7 +27,7 @@ class BookSpider(scrapy.Spider):
         result = {}
         for dl in dls:
             dt = dl.xpath("dt/node()")[0].extract()
-            print dt
+            print(dt)
             dd = dl.xpath("dd/node()")[0].extract()
 
             result[dt] = dd
