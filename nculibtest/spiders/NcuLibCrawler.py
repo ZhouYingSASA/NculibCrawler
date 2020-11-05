@@ -4,13 +4,17 @@ from nculibtest.items import NculibtestItem as Items
 
 list_url = "http://210.35.251.243/browse/cls_browsing_book.php?s_doctype=all&cls="
 tree_url = "http://210.35.251.243/browse/cls_browsing_tree.php?s_doctype=all&cls="
+book_url = "http://210.35.251.243/opac/item.php?marc_no="
 
 
 class NculibcrawlerSpider(scrapy.Spider):
     name = 'NcuLibCrawler'
     allowed_domains = ['210.35.251.243/browse/']
-    start_urls = [tree_url + "&cls=T&lvl=1"]
+    start_urls = [tree_url + "&cls=A&lvl=1"]
     url_set = set()  # 存储已爬过的url
+    custom_settings = {
+        "cookie":   "PHPSESSID=jnk7r2vetq1cro9ml14fj88me6"
+    }
 
     def parse(self, response):
         if response.url.startswith(list_url):  # 如果收到list url，爬取图书url，如果是最后一页，还yield下一个tree ch
@@ -28,7 +32,7 @@ class NculibcrawlerSpider(scrapy.Spider):
                     yield item
 
                 urls = response.xpath('.//a[@class="blue"]//@href').extract()  # 查找下一页url
-                if response.xpath('.//a[@class="blue"]/text()').extract()[-1] != "下一页":
+                if "下一页" not in response.xpath('.//a[@class="blue"]/text()').extract():
                     if ch == 'K':
                         ch = 'M'
                     yield self.make_requests_from_url(tree_url + chr(ord(ch)+1) + "&lvl=1")
@@ -48,3 +52,6 @@ class NculibcrawlerSpider(scrapy.Spider):
             cls = [x[4:] for x in response.xpath('//div[@class="stepright2"]/@name').extract()]
             for cl in cls:
                 yield self.make_requests_from_url(list_url + cl)
+
+        elif response.url.startswith(book_url):
+

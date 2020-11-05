@@ -65,7 +65,8 @@ ROBOTSTXT_OBEY = False  # nculib禁止robot爬取
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'nculibtest.pipelines.NculibtestPipeline': 100,
+   # 'nculibtest.pipelines.NculibtestPipeline': 100,
+   'nculibtest.pipelines.MySQLPipeline': 400
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
